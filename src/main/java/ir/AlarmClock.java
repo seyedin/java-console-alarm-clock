@@ -46,7 +46,6 @@ public class AlarmClock implements Runnable {
                 System.out.printf("\r%02d:%02d:%02d",
                         now.getHour(),
                         now.getMinute(),
-
                         now.getSecond());
             } catch (InterruptedException e) {
                 System.out.println("Thread was interrupted");
@@ -56,8 +55,6 @@ public class AlarmClock implements Runnable {
         System.out.println("\n*ALARM NOISES*");
         try {
             playSound(filePath);
-        } catch (UnsupportedAudioFileException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -74,7 +71,7 @@ public class AlarmClock implements Runnable {
      * @throws IOException                   if an I/O error occurs while reading the audio file
      * @throws LineUnavailableException      if a line for audio playback is unavailable
      */
-    private void playSound(String filePath) throws UnsupportedAudioFileException, IOException {
+    private void playSound(String filePath) throws IOException {
         File auidoFile = new File(filePath);
 
         try (AudioInputStream audioStream = AudioSystem.getAudioInputStream(auidoFile)) {
